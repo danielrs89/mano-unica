@@ -8,6 +8,7 @@ export class ManoTresService {
   playerList: Player;
   computerList: Player;
   finalizar: boolean = false;
+  mensajeResultado: string = '';
 
   constructor() {
     this.playerList = { mano: '', icono: '', id_mano: 0, puntos: 0 };
@@ -37,11 +38,11 @@ export class ManoTresService {
   getNombreMano(id: number): string {
     switch (id) {
       case 1:
-        return 'piedra';
+        return 'Piedra';
       case 2:
-        return 'papel';
+        return 'Papel';
       case 3:
-        return 'tijera';
+        return 'Tijera';
       default:
         return '';
     }
@@ -60,7 +61,10 @@ export class ManoTresService {
   }
 
   comprobarGanador(playerId: number, computerId: number) {
-    if (playerId === computerId) return; // Empate
+    if (playerId === computerId) {
+    this.mensajeResultado = '¡Empate!';
+    return;
+  }
 
     const ganaJugador =
       (playerId === 1 && computerId === 3) ||
@@ -69,8 +73,10 @@ export class ManoTresService {
 
     if (ganaJugador) {
       this.playerList.puntos += 1;
+      this.mensajeResultado = '¡Has ganado la ronda!';
     } else {
       this.computerList.puntos += 1;
+      this.mensajeResultado = 'Has perdido la ronda.';
     }
   }
 
