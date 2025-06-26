@@ -178,9 +178,9 @@
     <div class="left-side">
       <app-menu></app-menu>
 
+      <!-- <h5>Historial de Rondas</h5>
       @if (manoTresService.historial) {
       <div class="mt-3 overflow-auto border rounded p-3" style="max-height: 500px;">
-        <h5>Historial de Rondas</h5>
         <ul class="mb-0">
           @for (linea of manoTresService.historial; track $index) {
 
@@ -189,6 +189,16 @@
         </ul>
       </div>
       }
+      @if (manoCincoService.historial) {
+      <div class="mt-3 overflow-auto border rounded p-3" style="max-height: 500px;">
+        <ul class="mb-0">
+          @for (linea of manoCincoService.historial; track $index) {
+
+          <li>{{ linea }}</li>
+          }
+        </ul>
+      </div>
+      } -->
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">

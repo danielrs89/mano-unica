@@ -1,8 +1,103 @@
-<!--  -->
-<div class="container">
-    <div class="item">Piedra <button (click)="handlePiedra()">🗿</button></div>
-    <div class="item">Papel <button (click)="handlePapel()">📃</button></div>
-    <div class="item">Pijera <button (click)="handleTijera()">✂️</button></div>
-    <div class="item">Lagarto <button (click)="handleLagarto()">🦎</button></div>
-    <div class="item">Spock <button (click)="handleSpock()">🖖</button></div>
+<div class="mx-auto p-2">
+  <img src="..//public/ayudaCinco.jpg" alt="ayudaCinco" class="img-fluid mb-3" />
+
+  <h2>¡Piedra, Papel, Tijera, Lagarto o Spock!</h2>
+  <p>Selecciona tu jugada:</p>
+  <div class="container text-center">
+    <div class="d-flex flex-wrap justify-content-center gap-5">
+      <button
+        class="btn btn-outline-secondary fs-1 flex-fill min-width-btn"
+        (click)="manoCincoService.comienzaJuego(1)"
+      >
+        🗿 <br />
+        Piedra
+      </button>
+
+      <button
+        class="btn btn-outline-secondary fs-1 flex-fill min-width-btn"
+        (click)="manoCincoService.comienzaJuego(2)"
+      >
+        📄 <br />
+        Papel
+      </button>
+
+      <button
+        class="btn btn-outline-secondary fs-1 flex-fill min-width-btn"
+        (click)="manoCincoService.comienzaJuego(3)"
+      >
+        ✂️ <br />
+        Tijera
+      </button>
+      <button
+        class="btn btn-outline-secondary fs-1 flex-fill min-width-btn"
+        (click)="manoCincoService.comienzaJuego(3)"
+      >
+        🦎 <br />
+        Lagarto
+      </button>
+      <button
+        class="btn btn-outline-secondary fs-1 flex-fill min-width-btn"
+        (click)="manoCincoService.comienzaJuego(3)"
+      >
+        🖖 <br />
+        Spock
+      </button>
+    </div>
+  </div>
+
+  @if(manoCincoService.playerList.id_mano){
+  <h3>Resultado de la ronda</h3>
+  <div class="container text-center">
+    <div class="row row-cols-2 versus-animacion">
+      <div class="col">
+        <p>Tu mano:</p>
+        <button class="btn btn-outline-secondary fs-1">
+          {{ manoCincoService.playerList.icono }} <br />
+          {{ manoCincoService.playerList.mano }}
+        </button>
+      </div>
+
+      <div class="col">
+        <p>IA:</p>
+        <button class="btn btn-outline-secondary fs-1">
+          {{ manoCincoService.computerList.icono }} <br />
+          {{ manoCincoService.computerList.mano }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <p class="fs-4 fw-bold text-primary">
+    {{ manoCincoService.mensajeResultado }}
+  </p>
+  <h3>Puntuación</h3>
+  <p>Tú: {{ manoCincoService.playerList.puntos }}</p>
+  <p>IA: {{ manoCincoService.computerList.puntos }}</p>
+
+  <hr />
+  <button
+    class="btn btn-outline-secondary"
+    (click)="manoCincoService.finPartida(true)"
+  >
+    Finalizar partida
+  </button>
+<div
+  id="gameToast"
+  class="toast align-items-center text-white bg-primary border-0 position-fixed bottom-0 end-0 m-3"
+  role="alert"
+  aria-live="assertive"
+  aria-atomic="true"
+  data-bs-delay="3000"
+  data-bs-autohide="true"
+>
+  <div class="d-flex">
+    <div id="gameToastBody" class="toast-body"></div>
+    <button
+      type="button"
+      class="btn-close btn-close-white me-2 m-auto"
+      data-bs-dismiss="toast"
+      aria-label="Close"
+    ></button>
+  </div>
+</div>
+  }
 </div>

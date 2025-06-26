@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import Player from '../models/Player';
 import { Router } from '@angular/router';
 declare var bootstrap: any;
+
 @Injectable({
   providedIn: 'root',
 })

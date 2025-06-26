@@ -1,27 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ManoCincoService } from '../../services/mano-cinco.service';
 
 @Component({
   selector: 'app-mano-cinco',
   imports: [],
   templateUrl: './mano-cinco.component.html',
-  styleUrl: './mano-cinco.component.css'
+  styleUrl: './mano-cinco.component.css',
 })
-export class ManoCincoComponent implements OnInit{
-
-constructor(){}
-ngOnInit(): void {
-  
-}
-
-handlePiedra(){}
-handlePapel(){}
-handleTijera(){}
-handleLagarto(){}
-handleSpock(){}
-
-
-
-
-
-
+export class ManoCincoComponent {
+  constructor(public manoCincoService:ManoCincoService) {}
 }
