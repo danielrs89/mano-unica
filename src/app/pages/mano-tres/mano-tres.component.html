@@ -2,41 +2,37 @@
   <h2>¡Piedra, Papel o Tijera!</h2>
   <p>Selecciona tu jugada:</p>
   <div class="container text-center">
-    <div class="row row-cols-3">
-      <div class="col">
-        <button
-          class="btn btn-outline-secondary fs-1"
-          (click)="manoTresService.comienzaJuego(1)"
-        >
-          🗿 <br />
-          Piedra
-        </button>
-      </div>
-      <div class="col">
-        <button
-          class="btn btn-outline-secondary fs-1"
-          (click)="manoTresService.comienzaJuego(2)"
-        >
-          📄 <br />
-          Papel
-        </button>
-      </div>
-      <div class="col">
-        <button
-          class="btn btn-outline-secondary fs-1"
-          (click)="manoTresService.comienzaJuego(3)"
-        >
-          ✂️ <br />
-          Tijera
-        </button>
-      </div>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+      <button
+        class="btn btn-outline-secondary fs-1 flex-fill min-width-btn"
+        (click)="manoTresService.comienzaJuego(1)"
+      >
+        🗿 <br />
+        Piedra
+      </button>
+
+      <button
+        class="btn btn-outline-secondary fs-1 flex-fill min-width-btn"
+        (click)="manoTresService.comienzaJuego(2)"
+      >
+        📄 <br />
+        Papel
+      </button>
+
+      <button
+        class="btn btn-outline-secondary fs-1 flex-fill min-width-btn"
+        (click)="manoTresService.comienzaJuego(3)"
+      >
+        ✂️ <br />
+        Tijera
+      </button>
     </div>
   </div>
 
   @if(manoTresService.playerList.id_mano){
   <h3>Resultado de la ronda</h3>
   <div class="container text-center">
-    <div class="row row-cols-2">
+    <div class="row row-cols-2 versus-animacion">
       <div class="col">
         <p>Tu mano:</p>
         <button class="btn btn-outline-secondary fs-1">
@@ -54,7 +50,9 @@
       </div>
     </div>
   </div>
-  <p class="fs-4 fw-bold text-primary">{{ manoTresService.mensajeResultado }}</p>
+  <p class="fs-4 fw-bold text-primary">
+    {{ manoTresService.mensajeResultado }}
+  </p>
   <h3>Puntuación</h3>
   <p>Tú: {{ manoTresService.playerList.puntos }}</p>
   <p>IA: {{ manoTresService.computerList.puntos }}</p>
@@ -64,6 +62,26 @@
     class="btn btn-outline-secondary"
     (click)="manoTresService.finPartida(true)"
   >
-    Finalizar partida</button
-  >}
+    Finalizar partida
+  </button>
+<div
+  id="gameToast"
+  class="toast align-items-center text-white bg-primary border-0 position-fixed bottom-0 end-0 m-3"
+  role="alert"
+  aria-live="assertive"
+  aria-atomic="true"
+  data-bs-delay="3000"
+  data-bs-autohide="true"
+>
+  <div class="d-flex">
+    <div id="gameToastBody" class="toast-body"></div>
+    <button
+      type="button"
+      class="btn-close btn-close-white me-2 m-auto"
+      data-bs-dismiss="toast"
+      aria-label="Close"
+    ></button>
+  </div>
+</div>
+  }
 </div>

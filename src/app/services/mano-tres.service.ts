@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import Player from '../models/Player';
-
+import { Router } from '@angular/router';
+declare var bootstrap: any;
 @Injectable({
   providedIn: 'root',
 })
@@ -9,8 +10,10 @@ export class ManoTresService {
   computerList: Player;
   finalizar: boolean = false;
   mensajeResultado: string = '';
+  ronda: number = 0;
+  historial: string[] = [];
 
-  constructor() {
+  constructor(private route: Router) {
     this.playerList = { mano: '', icono: '', id_mano: 0, puntos: 0 };
     this.computerList = { mano: '', icono: '', id_mano: 0, puntos: 0 };
   }
@@ -22,6 +25,13 @@ export class ManoTresService {
 
     this.randonMano(3, 1); // genera la mano de la IA
     this.comprobarGanador(this.playerList.id_mano, this.computerList.id_mano);
+
+    this.ronda += 1;
+
+    this.historial.push(
+      `Ronda ${this.ronda}: Tú - ${this.playerList.mano} ${this.playerList.icono} | IA - ${this.computerList.mano} ${this.computerList.icono} => ${this.mensajeResultado}`
+    );
+
     this.finPartida(this.finalizar);
   }
 
@@ -62,9 +72,9 @@ export class ManoTresService {
 
   comprobarGanador(playerId: number, computerId: number) {
     if (playerId === computerId) {
-    this.mensajeResultado = '¡Empate!';
-    return;
-  }
+      this.mensajeResultado = '¡Empate!';
+      return;
+    }
 
     const ganaJugador =
       (playerId === 1 && computerId === 3) ||
@@ -82,32 +92,56 @@ export class ManoTresService {
 
   finPartida(finalizar: boolean) {
     if (finalizar) {
-      if (this.playerList.puntos > this.computerList.puntos) {
-        alert(
-          `Has ganado con ${this.playerList.puntos} puntos. IA tiene ${this.computerList.puntos} puntos.`
-        );
-      } else if (this.playerList.puntos < this.computerList.puntos) {
-        alert(
-          `Has perdido con ${this.playerList.puntos} puntos. IA tiene ${this.computerList.puntos} puntos.`
-        );
-      } else {
-        alert(`Empate con ${this.playerList.puntos} puntos.`);
-      }
-      this.reiniciar(); // Solo una vez
-    }
+      let mensaje = '';
+      let tipo: 'success' | 'danger' | 'info' = 'info';
 
-    // Reset de manos para próxima ronda
-    // this.playerList.id_mano = 0;
-    // this.playerList.mano = '';
-    // this.playerList.icono = '';
-    // this.computerList.id_mano = 0;
-    // this.computerList.mano = '';
-    // this.computerList.icono = '';
+      if (this.playerList.puntos > this.computerList.puntos) {
+        mensaje = `Has ganado con ${this.playerList.puntos} puntos. IA tiene ${this.computerList.puntos} puntos.`;
+        tipo = 'success';
+      } else if (this.playerList.puntos < this.computerList.puntos) {
+        mensaje = `Has perdido con ${this.playerList.puntos} puntos. IA tiene ${this.computerList.puntos} puntos.`;
+        tipo = 'danger';
+      } else {
+        mensaje = `Empate con ${this.playerList.puntos} puntos.`;
+        tipo = 'info';
+      }
+
+      this.showToast(mensaje, tipo);
+      // Esperar 3 segundos (3000 milisegundos)
+      setTimeout(() => {
+        this.reiniciar();
+        this.route.navigate(['/']);
+      }, 3000);
+    }
+  }
+  showToast(
+    mensaje: string,
+    tipo: 'success' | 'danger' | 'warning' | 'info' = 'info'
+  ) {
+    const toastEl = document.getElementById('gameToast');
+    const toastBody = document.getElementById('gameToastBody');
+
+    if (toastBody && toastEl) {
+      toastBody.innerText = mensaje;
+
+      toastEl.classList.remove(
+        'bg-success',
+        'bg-danger',
+        'bg-warning',
+        'bg-info'
+      );
+      toastEl.classList.add(`bg-${tipo}`);
+
+      const toast = new bootstrap.Toast(toastEl);
+      toast.show();
+    }
   }
 
   reiniciar() {
     this.playerList = { mano: '', icono: '', id_mano: 0, puntos: 0 };
     this.computerList = { mano: '', icono: '', id_mano: 0, puntos: 0 };
+    this.historial = [];
+    this.ronda = 0;
     this.finalizar = false;
   }
 }
