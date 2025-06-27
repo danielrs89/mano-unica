@@ -1,12 +1,24 @@
 <header>
-    <h1>{{title}}</h1>
-    <nav>
-        <ul class="nav nav-tabs">
-            <!-- IMP la /ruta es de raiz sino ir desde donde estamos ej /movies/create -->
-            <li class="nav-item"><a class="nav-link active" aria-current="page" routerLink="/">Inicio</a></li>
-            <li class="nav-item"><a class="nav-link" routerLink="/tres">Tres</a></li>
-            <li class="nav-item"><a class="nav-link" routerLink="/cinco">Cinco</a></li>
-        </ul>
-    </nav>
+  <h1>{{ title }}</h1>
+  <nav>
+    <ul class="nav nav-tabs">
+      <!-- IMP la /ruta es de raiz sino ir desde donde estamos ej /movies/create -->
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" routerLink="/">Inicio</a>
+      </li>
+      <li class="nav-item"><a class="nav-link" routerLink="/tres">Tres</a></li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/cinco">Cinco</a>
+      </li>
+    </ul>
+  </nav>
 </header>
-
+<section class="content mt-3">
+  <img src="..//public/ayudaTres.jpg" alt="ayudaTres" class="img-fluid mb-3" />
+<br>
+  <img
+    src="..//public/ayudaCinco.jpg"
+    alt="ayudaCinco"
+    class="img-fluid mb-3"
+  />
+</section>
