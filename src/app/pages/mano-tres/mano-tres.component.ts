@@ -8,7 +8,5 @@ import { ManoTresService } from '../../services/mano-tres.service';
   styleUrl: './mano-tres.component.css',
 })
 export class ManoTresComponent {
-  // <!-- 🗿📃✂️🦎🖖 -->
-
   constructor(public manoTresService: ManoTresService) {}
 }

@@ -8,5 +8,5 @@ import { ManoCincoService } from '../../services/mano-cinco.service';
   styleUrl: './mano-cinco.component.css',
 })
 export class ManoCincoComponent {
-  constructor(public manoCincoService:ManoCincoService) {}
+  constructor(public manoCincoService: ManoCincoService) {}
 }
