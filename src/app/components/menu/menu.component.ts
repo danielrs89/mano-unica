@@ -5,12 +5,9 @@ import { RouterLink } from '@angular/router';
   selector: 'app-menu',
   imports: [RouterLink],
   templateUrl: './menu.component.html',
-  styleUrl: './menu.component.css'
+  styleUrl: './menu.component.css',
 })
 export class MenuComponent {
-title = 'Mano Única';
-  constructor() {
-  
-}
-
+  title = 'Mano Única';
+  constructor() {}
 }
